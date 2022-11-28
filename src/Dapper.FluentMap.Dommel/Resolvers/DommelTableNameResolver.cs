@@ -15,12 +15,10 @@ namespace Dapper.FluentMap.Dommel.Resolvers
         /// <inheritdoc />
         public string ResolveTableName(Type type)
         {
-            IEntityMap entityMap;
-            if (FluentMapper.EntityMaps.TryGetValue(type, out entityMap))
+            if (FluentMapper.EntityMaps.TryGetValue(type, out var entityMap))
             {
                 var mapping = entityMap as IDommelEntityMap;
-
-                if (mapping != null)
+                if (mapping?.TableName != null)
                 {
                     return mapping.TableName;
                 }
