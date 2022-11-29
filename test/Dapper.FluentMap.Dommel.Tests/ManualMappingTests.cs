@@ -78,7 +78,6 @@ namespace Dapper.FluentMap.Dommel.Tests
         }
 
         [Fact]
-
         public void PropertyIsGenerated()
         {
             PreTest();
@@ -110,7 +109,6 @@ namespace Dapper.FluentMap.Dommel.Tests
         }
 
         [Fact]
-
         public void PropertiesAreNotGenerated()
         {
             PreTest();
