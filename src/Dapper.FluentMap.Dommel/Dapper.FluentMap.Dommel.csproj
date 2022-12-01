@@ -10,7 +10,6 @@
     <PackageProjectUrl>https://github.com/autofixer-tech/Dapper-FluentMap</PackageProjectUrl>
     <PackageId>Autofixer.Dapper.FluentMap.Dommel</PackageId>
     <Product>Autofixer.Dapper.FluentMap.Dommel</Product>
-    <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dapper.FluentMap\Dapper.FluentMap.csproj" />
