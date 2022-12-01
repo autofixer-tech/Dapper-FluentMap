@@ -44,7 +44,10 @@ namespace Dapper.FluentMap.Dommel.Resolvers
                 {
                     foreach (var convention in conventions)
                     {
-                        var propertyMaps = convention.PropertyMaps.Where(m => m.PropertyInfo.Name == propertyInfo.Name).ToList();
+                        var propertyMaps = convention.PropertyMaps
+                            .Where(m => m.PropertyInfo.Name == propertyInfo.Name)
+                            .Where(m => m.PropertyInfo.ReflectedType == propertyInfo.ReflectedType)
+                            .ToList();
                         if (propertyMaps.Count == 1)
                         {
                             return propertyMaps[0].ColumnName;
