@@ -99,6 +99,38 @@ namespace Dapper.FluentMap.Configuration
             return this;
         }
 
+        /// <summary>
+        /// Configures the current convention for all entities in the specified assembly filtered by the specified namespaces.
+        /// </summary>
+        /// <param name="assembly">The assembly to scan for entities.</param>
+        /// <param name="namespaces">
+        /// An array of namespaces which filter the types in <paramref name="assembly"/>.
+        /// This parameter is optional.
+        /// </param>
+        /// <returns>The current instance of <see cref="T:Dapper.FluentMap.Configuration.FluentConventionConfiguration"/>.</returns>
+        public FluentConventionConfiguration ForEntitiesInAssembly<TEntity>(Assembly assembly, params string[] namespaces)
+        {
+            var entityType = typeof(TEntity);
+            var entities = assembly.GetExportedTypes();
+            var enumerable = entities.Where(_ => _.IsSubclassOf(entityType) && !_.IsAbstract).ToList();
+            foreach (var type in enumerable)
+            {
+                if (namespaces != null &&
+                    namespaces.Length > 0 &&
+                    namespaces.All(n => n != type.Namespace))
+                {
+                    // Filter by namespace.
+                    continue;
+                }
+
+                MapProperties(type);
+                FluentMapper.TypeConventions.AddOrUpdate(type, _convention);
+                FluentMapper.AddConventionTypeMap(type);
+            }
+
+            return this;
+        }
+
         private void MapProperties(Type type)
         {
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);

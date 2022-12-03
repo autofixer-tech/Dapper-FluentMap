@@ -29,7 +29,7 @@ namespace Dapper.FluentMap.Dommel.Mapping
             }
 
             var convention = conventions.First();
-            foreach (var propertyMap in convention.PropertyMaps)
+            foreach (var propertyMap in convention.PropertyMaps.Where(m => m.PropertyInfo.ReflectedType == entityType))
             {
                 Map(propertyMap);
             }

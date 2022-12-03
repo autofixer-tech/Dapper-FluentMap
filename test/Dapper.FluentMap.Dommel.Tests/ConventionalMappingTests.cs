@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Dapper.FluentMap.Utils;
-using Dommel;
 using Xunit;
 
 namespace Dapper.FluentMap.Dommel.Tests
